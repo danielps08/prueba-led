@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Iniciar sesión</legend>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <spam>{{ error }}</spam>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.contraseña.label(class="form-control-label") }}
+                    {% if form.contraseña.errors %}
+                        {{ form.contraseña(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.contraseña.errors %}
+                                <spam>{{ error }}</spam>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.contraseña(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {{ form.recordar(class="form-check-input") }}
+                    {{ form.recordar.label(class="form-check-label") }}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.enviar(class="btn btn-outline-info") }}
+                <small class="text-muted ml-2">
+                    <a href="{{ url_for('users.reset_request') }}">¿Olvidaste tu contraseña?</a>
+                </small>
+            </div>
+        </form>
+    </div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            ¿No tienes una cuenta? <a class="ml-2" href="{{ url_for('users.register') }}">Crear cuenta nueva</a>
+        </small>
+    </div>
+{% endblock content %}
